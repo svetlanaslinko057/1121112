@@ -60,6 +60,8 @@ import CabinetV2 from './pages/CabinetV2';
 import OrderDetailsV2 from './pages/OrderDetailsV2';
 // V2-19: Compare Bar
 import CompareBar from './components/compare/CompareBar';
+// V2-19: Search Results
+import SearchResults from './pages/SearchResults';
 import './App.css';
 
 // Analytics Wrapper Component
