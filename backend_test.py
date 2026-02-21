@@ -13,7 +13,7 @@ from datetime import datetime
 from typing import Optional, Dict, Any
 
 class BackendAPITester:
-    def __init__(self, base_url: str = "https://smart-payment-core.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://monogp-full-stack.preview.emergentagent.com"):
         self.base_url = base_url.rstrip('/')
         self.session = requests.Session()
         self.session.headers.update({'Content-Type': 'application/json'})
