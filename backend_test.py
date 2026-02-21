@@ -290,6 +290,103 @@ class BackendAPITester:
         
         return success
     
+    def test_v2_products_by_ids(self):
+        """Test V2-20: Products by IDs endpoint for Recently Viewed"""
+        print("\n🆔 PRODUCTS BY IDS TESTS (V2-20)")
+        print("-" * 30)
+        
+        # First get some product IDs from catalog
+        success1, catalog_data = self.test_api(
+            "Get Product IDs from Catalog", 
+            "GET", 
+            "/api/v2/catalog",
+            data={"limit": 3},
+            expected_status=200
+        )
+        
+        product_ids = []
+        if success1 and catalog_data:
+            products = catalog_data.get('products', [])
+            product_ids = [p.get('id') for p in products[:3] if p.get('id')]
+        
+        if not product_ids:
+            print("   ⚠️  No product IDs found, using test IDs")
+            product_ids = ["test-id-1", "test-id-2"]
+        
+        # Test products by IDs endpoint
+        success2, data = self.test_api(
+            "Products by IDs", 
+            "POST", 
+            "/api/v2/products/by-ids",
+            data={"ids": product_ids},
+            expected_status=200
+        )
+        
+        if success2 and data:
+            returned_products = data.get('products', [])
+            print(f"   Products requested: {len(product_ids)}")
+            print(f"   Products returned: {len(returned_products)}")
+            
+        return success2
+    
+    def test_v2_catalog_with_sort(self):
+        """Test V2-20: Catalog API with sort parameter"""
+        print("\n📋 CATALOG SORT TESTS (V2-20)")
+        print("-" * 30)
+        
+        # Test different sort parameters
+        sort_options = [
+            ("popular", "Popular products"),
+            ("price_asc", "Price ascending"),
+            ("price_desc", "Price descending"),
+            ("new", "Newest first"),
+            ("discount", "Discount sorting")
+        ]
+        
+        test_results = []
+        
+        for sort_param, description in sort_options:
+            success, data = self.test_api(
+                f"Catalog Sort: {description}", 
+                "GET", 
+                "/api/v2/catalog",
+                data={"sort_by": sort_param, "limit": 5},
+                expected_status=200
+            )
+            
+            if success and data:
+                products = data.get('products', [])
+                print(f"   {description}: {len(products)} products")
+                
+            test_results.append(success)
+        
+        return all(test_results)
+    
+    def test_deal_of_day_endpoint(self):
+        """Test V2-20: Deal of the Day API endpoint"""
+        print("\n🔥 DEAL OF THE DAY TESTS (V2-20)")
+        print("-" * 30)
+        
+        # Test catalog with discount sort (used by DealOfDay component)
+        success, data = self.test_api(
+            "Deal of Day Products", 
+            "GET", 
+            "/api/v2/catalog",
+            data={"sort": "discount", "limit": 1},
+            expected_status=200
+        )
+        
+        if success and data:
+            products = data.get('products', [])
+            print(f"   Deal products found: {len(products)}")
+            if products:
+                product = products[0]
+                print(f"   Product: {product.get('title', 'N/A')}")
+                print(f"   Price: {product.get('price', 0)}")
+                print(f"   Compare Price: {product.get('compare_price', 0)}")
+        
+        return success
+    
     def run_all_tests(self):
         """Run all test suites"""
         print(f"🚀 Starting Backend API Test Suite")
