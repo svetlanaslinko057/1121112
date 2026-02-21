@@ -95,8 +95,17 @@ const Home = () => {
 
           {/* Right Content */}
           <div className="flex-1">
-            {/* Hero Banner */}
-            <div className="transform hover:scale-[1.01] transition-transform duration-300">
+            {/* V2-20: Hero Carousel */}
+            <HeroCarousel />
+
+            {/* V2-20: Categories Grid */}
+            <CategoriesGrid />
+
+            {/* V2-20: Top Products Section */}
+            <ProductSection title="Топ продажів" sort="popular" link="/catalog?sort=popular" />
+
+            {/* Hero Banner - LEGACY */}
+            <div className="transform hover:scale-[1.01] transition-transform duration-300 hidden">
               <HeroBanner />
             </div>
 
