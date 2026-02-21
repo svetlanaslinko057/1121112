@@ -15,6 +15,8 @@ import FeaturedReviews from '../components/FeaturedReviews';
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+// V2-24: SEO Schema.org
+import { OrganizationSchema, WebSiteSchema, LocalBusinessSchema } from '../components/seo';
 
 // BLOCK V2-14: Retail Homepage Components
 import { 
