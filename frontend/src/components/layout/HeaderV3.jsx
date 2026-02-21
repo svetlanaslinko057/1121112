@@ -18,6 +18,7 @@ const API_URL = process.env.REACT_APP_BACKEND_URL || "";
  */
 export default function HeaderV3() {
   const [showMega, setShowMega] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
