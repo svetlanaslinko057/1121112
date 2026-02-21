@@ -4,3 +4,9 @@ export { default as BrandsStrip } from './BrandsStrip';
 export { default as AdvantagesStrip } from './AdvantagesStrip';
 export { default as Testimonials } from './Testimonials';
 export { default as BlogTeasers } from './BlogTeasers';
+// V2-20: New Homepage Retail 3.0 components
+export { default as HeroCarousel } from './HeroCarousel';
+export { default as ProductSection } from './ProductSection';
+export { default as CategoriesGrid } from './CategoriesGrid';
+export { default as RecentlyViewed } from './RecentlyViewed';
+export { default as NewsletterBlock } from './NewsletterBlock';
