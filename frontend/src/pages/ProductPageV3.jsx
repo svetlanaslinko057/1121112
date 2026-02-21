@@ -426,6 +426,8 @@ const ProductPageV3 = () => {
   useEffect(() => {
     if (product) {
       trackProductView(id, product.title, product.price);
+      // V2-20: Add to recently viewed
+      addToRecentlyViewed(product.id || id);
     }
   }, [product, id]);
 
