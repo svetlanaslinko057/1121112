@@ -252,8 +252,23 @@ export default function HeaderV3() {
             <Link to="/about" className="v3-nav-link">Про нас</Link>
             <Link to="/promotions" className="v3-nav-link v3-nav-promo">Акції</Link>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="v3-mobile-menu-btn md:hidden"
+            onClick={() => setShowMobileMenu(true)}
+            data-testid="mobile-menu-btn"
+          >
+            <Menu size={24} />
+          </button>
         </div>
       </div>
+
+      {/* V2-23: Mobile Menu Drawer */}
+      <MobileMenuDrawer 
+        open={showMobileMenu} 
+        onClose={() => setShowMobileMenu(false)} 
+      />
     </header>
   );
 }
