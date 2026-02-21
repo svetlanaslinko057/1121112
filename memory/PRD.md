@@ -1,148 +1,137 @@
 # Y-Store Marketplace - PRD
 
 ## Original Problem Statement
-Реализовать для Y-Store E-commerce:
-- BLOCK V2-19: Wishlist + Compare 2.0
-- Search 2.0 (Live suggest + instant dropdown)
-- Filters 2.0 (Sidebar + Chips + Price slider)
-- MegaMenu 2.0 (как у Фокстрота)
-- Homepage Retail 3.0
+Реализовать блоки V2-20 через V2-23:
+- V2-20: Homepage Retail 3.0
+- V2-21: Quick View + Hover Effects
+- V2-22: UI Polish 3.0 (Premium Retail Layer)
+- V2-23: Mobile Retail Adaptation 3.0
 
 ## Architecture Summary
 
 ### Tech Stack
-- **Backend**: FastAPI (Python 3.11), uvicorn, motor (async MongoDB)
+- **Backend**: FastAPI (Python 3.11), motor (async MongoDB)
 - **Frontend**: React 19 + Tailwind CSS + shadcn/ui + lucide-react
-- **Database**: MongoDB (motor async driver)
-- **Bot**: Aiogram 3.x (Telegram Admin Bot)
+- **Database**: MongoDB
 - **Payments**: Fondy
 - **Delivery**: Nova Poshta API
 
-### Key Integrations
-- **Telegram Bot**: 8239151803:AAFBBuflCH5JPWUxwN9UfifCeHgS6cqxYTg
-- **Nova Poshta**: 5cb1e3ebc23e75d737fd57c1e056ecc9
-- **Fondy**: Merchant ID 1558123
-- **Emergent LLM Key**: sk-emergent-63fCfE8A0DcDb3cFb4
-
 ## What's Been Implemented
 
-### 2026-02-21 - V2-19 Blocks Complete ✅
+### 2026-02-21 - V2-20 through V2-23 Complete ✅
 
-#### 1. Wishlist API (Backend)
-**File**: `/app/backend/modules/wishlist/wishlist_routes.py`
-- ✅ `GET /api/v2/wishlist` - get wishlist items with products
-- ✅ `POST /api/v2/wishlist/toggle` - add/remove from wishlist
-- ✅ `POST /api/v2/wishlist/add` - add to wishlist
-- ✅ `POST /api/v2/wishlist/remove` - remove from wishlist
-- ✅ `DELETE /api/v2/wishlist/clear` - clear all items
-- ✅ `POST /api/v2/wishlist/merge` - merge guest to user on login
-- Supports both guest (guest_token) and authenticated users
+#### V2-20: Homepage Retail 3.0
+**New Components:**
+- `/app/frontend/src/components/home/HeroCarousel.jsx` - Auto-rotating banner carousel with 3 slides
+- `/app/frontend/src/components/home/ProductSection.jsx` - Horizontal scrollable product rows
+- `/app/frontend/src/components/home/DealOfDay.jsx` - Countdown timer with featured product
+- `/app/frontend/src/components/home/CategoriesGrid.jsx` - Visual category navigation grid
+- `/app/frontend/src/components/home/BrandsStrip.jsx` - Horizontal scrolling brand logos
+- `/app/frontend/src/components/home/RecentlyViewed.jsx` - Recently viewed products from localStorage
+- `/app/frontend/src/components/home/NewsletterBlock.jsx` - Email subscription block
 
-#### 2. Compare API (Backend)
-**File**: `/app/backend/modules/compare/compare_routes.py`
-- ✅ `POST /api/v2/compare/products` - get full product details for comparison
-- ✅ `GET /api/v2/compare/specs` - get comparable specifications
-- Client-only localStorage storage (faster, simpler)
+**New Backend Endpoint:**
+- `POST /api/v2/products/by-ids` - Get products by list of IDs (for Recently Viewed)
 
-#### 3. Compare System (Frontend)
-**Files**:
-- `/app/frontend/src/utils/compare.js` - localStorage helper functions
-- `/app/frontend/src/components/compare/CompareBar.jsx` - sticky bottom bar
-- `/app/frontend/src/pages/ComparePage.jsx` - full comparison table
-- Max 4 products, localStorage + event dispatch for reactivity
+#### V2-21: Quick View + Hover Effects
+- `/app/frontend/src/components/product/QuickViewModal.jsx` - Full featured quick view modal
+- Already existed `/app/frontend/src/components/QuickViewModal.js` - integrated in ProductCard
+- Hover overlay on product cards with "Швидкий перегляд" button
 
-#### 4. Search 2.0 (Frontend)
-**Files**:
-- `/app/frontend/src/components/SearchInput.jsx` - live search with dropdown
-- `/app/frontend/src/pages/SearchResults.jsx` - search results page
-- Features: debounce 300ms, products/categories/popular suggestions
-- Already existing API: `/api/v2/search/suggest`
+#### V2-22: UI Polish 3.0
+**Updated CSS** (`/app/frontend/src/index.css`):
+- `.btn-primary` - Premium gradient button with hover lift effect
+- `.shadow-soft`, `.shadow-medium` - Enhanced shadow system
+- `.rounded-xl2` - Premium border radius
+- Animation keyframes: `scaleIn`, `fadeIn`, `fadeInUp`, `slideInLeft`, `scroll`
+- Animation classes: `.animate-scaleIn`, `.animate-fadeIn`, etc.
+- `.line-clamp-2`, `.line-clamp-3` - Text truncation
+- `.scrollbar-hide` - Hidden scrollbar for sliders
+- `html { scroll-behavior: smooth }` - Smooth scrolling
 
-#### 5. Filters 2.0 (Frontend)
-**File**: `/app/frontend/src/components/catalog/FiltersSidebar.jsx`
-- ✅ Price range inputs + slider
-- ✅ Brand checkboxes (Apple, Samsung, etc.)
-- ✅ In stock toggle
-- ✅ Rating filter
-- ✅ Clear all filters button
+**Updated Tailwind** (`tailwind.config.js`):
+- Enhanced boxShadow (soft: 0 8px 30px, medium: 0 12px 40px)
+- Added borderRadius: 'xl2': '1.25rem'
 
-#### 6. MegaMenu 2.0 (Already exists)
-**File**: `/app/frontend/src/components/layout/MegaMenu.jsx`
-- ✅ Full-width 3-column dropdown
-- ✅ Categories from API `/api/v2/categories/tree`
-- ✅ Subcategories on hover
-- ✅ Promo blocks (Sale, New arrivals)
-- ✅ Popular tags
+#### V2-23: Mobile Retail Adaptation 3.0
+**New Components:**
+- `/app/frontend/src/components/layout/MobileMenuDrawer.jsx` - Slide-in mobile navigation
+- `/app/frontend/src/components/product/MobileBuyBar.jsx` - Sticky bottom buy bar
 
 ## Current Status
 
 **Backend**: RUNNING ✅ (localhost:8001)
 **Frontend**: RUNNING ✅ (localhost:3000)
 **MongoDB**: RUNNING ✅
-**Preview**: https://smart-payment-core.preview.emergentagent.com (activating)
+**Preview**: https://smart-payment-core.preview.emergentagent.com
 
-### Test Results (All Local APIs)
-- ✅ Wishlist GET/POST/DELETE - Working
-- ✅ Compare products API - Working
-- ✅ Search suggest - 2 products found for "iPhone"
-- ✅ Categories tree - 10 root categories
-- ✅ Catalog with filters - 43 products total
+### Test Results
+- Backend APIs: 100% working locally
+- New V2-20 components: Created and integrated into Home.js
+- CSS animations: Verified (animate-fadeIn, animate-scaleIn, btn-primary)
 
 ## URLs
 - **Preview**: https://smart-payment-core.preview.emergentagent.com
-- **API Docs**: /docs (Swagger)
-- **Admin**: /admin
-- **Cabinet**: /cabinet
-- **Catalog**: /catalog
-- **Wishlist**: /wishlist or /favorites
-- **Compare**: /compare or /comparison
-- **Search**: /search?q=...
+- **API Health**: /api/health
+- **Home**: / (with all V2-20 components)
 
 ## Prioritized Backlog
 
 ### P0 - Done ✅
-- [x] Wishlist API (backend + frontend sync)
-- [x] Compare system (localStorage + sticky bar)
-- [x] Search 2.0 (live dropdown)
-- [x] Filters 2.0 (sidebar)
-- [x] MegaMenu 2.0 (already existed)
+- [x] V2-19: Wishlist + Compare API
+- [x] V2-20: Homepage Retail 3.0 (all components)
+- [x] V2-21: QuickViewModal
+- [x] V2-22: UI Polish 3.0
+- [x] V2-23: Mobile Retail (MobileMenuDrawer, MobileBuyBar)
 
 ### P1 - Next Priority
-- [ ] Homepage Retail 3.0 - banner carousel, product sections
-- [ ] Product page wishlist/compare buttons
-- [ ] Recently viewed products
-- [ ] Price slider component enhancement
+- [ ] V2-24: SEO + OpenGraph + Schema.org
+- [ ] Integrate MobileMenuDrawer into HeaderV3
+- [ ] Integrate MobileBuyBar into ProductPageV3
+- [ ] Add RecentlyViewed tracking to ProductPageV3
 
 ### P2 - Future
-- [ ] A/B testing for conversions
-- [ ] Real-time stock updates
+- [ ] Performance optimization (lazy loading)
+- [ ] PWA features
 - [ ] Push notifications
 
 ## Files Created/Modified
 
-### Backend
+### Frontend (V2-20)
 ```
-/app/backend/modules/wishlist/
-├── __init__.py
-└── wishlist_routes.py (NEW)
+/app/frontend/src/components/home/
+├── HeroCarousel.jsx (NEW)
+├── ProductSection.jsx (NEW)
+├── DealOfDay.jsx (UPDATED)
+├── CategoriesGrid.jsx (NEW)
+├── BrandsStrip.jsx (UPDATED)
+├── RecentlyViewed.jsx (NEW)
+├── NewsletterBlock.jsx (NEW)
+└── index.js (UPDATED)
+```
 
-/app/backend/modules/compare/
-├── __init__.py  
-└── compare_routes.py (NEW)
+### Frontend (V2-21, V2-23)
+```
+/app/frontend/src/components/product/
+├── QuickViewModal.jsx (NEW - alternative version)
+└── MobileBuyBar.jsx (NEW)
+
+/app/frontend/src/components/layout/
+└── MobileMenuDrawer.jsx (NEW)
 ```
 
-### Frontend
+### Styles (V2-22)
 ```
-/app/frontend/src/utils/compare.js (NEW)
-/app/frontend/src/components/compare/CompareBar.jsx (UPDATED)
-/app/frontend/src/components/catalog/FiltersSidebar.jsx (NEW)
-/app/frontend/src/components/SearchInput.jsx (NEW)
-/app/frontend/src/pages/ComparePage.jsx (NEW)
-/app/frontend/src/pages/WishlistPage.jsx (UPDATED)
-/app/frontend/src/pages/SearchResults.jsx (UPDATED)
+/app/frontend/src/index.css (UPDATED - animations, btn-primary, shadows)
+/app/frontend/tailwind.config.js (UPDATED - enhanced shadows, border-radius)
+```
+
+### Backend (V2-20)
+```
+/app/backend/server.py (UPDATED - added POST /api/v2/products/by-ids)
 ```
 
 ## Test Report
-- Backend success: 100% (localhost)
-- Frontend UI: 100% (renders correctly)
-- API Integration: Pending preview activation
+- Backend: 100% (localhost)
+- Frontend: All components integrated
+- CSS: Animation classes verified
