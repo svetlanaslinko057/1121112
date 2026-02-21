@@ -19,6 +19,8 @@ import ShareModal from '../components/ShareModal';
 import { trackProductView, trackAddToCart } from '../lib/track';
 import MobileBuyBar from '../components/product/MobileBuyBar';
 import { addToRecentlyViewed } from '../components/home/RecentlyViewed';
+// V2-24: SEO
+import { SEOMeta, ProductSchema, BreadcrumbSchema } from '../components/seo';
 
 // ============ GALLERY V3 ============
 const GalleryV3 = ({ images = [], videos = [], productTitle, discount }) => {
