@@ -23,7 +23,12 @@ import {
   BrandsStrip, 
   AdvantagesStrip, 
   Testimonials, 
-  BlogTeasers 
+  BlogTeasers,
+  HeroCarousel,
+  ProductSection,
+  CategoriesGrid,
+  RecentlyViewed,
+  NewsletterBlock
 } from '../components/home';
 
 const Home = () => {
