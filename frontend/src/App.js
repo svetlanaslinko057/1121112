@@ -136,6 +136,7 @@ function App() {
                           <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
+                        <CompareBar />
                         <ScrollToTop />
                         <FloatingActionButton />
                         {/* Old components removed - replaced by FloatingActionButton */}
