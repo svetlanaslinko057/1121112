@@ -1080,6 +1080,28 @@ async def search_stats(search: str):
     }
 
 
+# V2-20: Get products by IDs (for Recently Viewed)
+class ProductsByIdsRequest(BaseModel):
+    ids: List[str]
+
+@api_router.post("/v2/products/by-ids")
+async def get_products_by_ids(request: ProductsByIdsRequest):
+    """Get products by list of IDs - used for Recently Viewed, Compare, etc."""
+    if not request.ids:
+        return {"products": []}
+    
+    products = await db.products.find(
+        {"id": {"$in": request.ids}},
+        {"_id": 0}
+    ).to_list(20)
+    
+    # Sort by original order
+    id_order = {id: i for i, id in enumerate(request.ids)}
+    products.sort(key=lambda p: id_order.get(p.get("id"), 999))
+    
+    return {"products": products}
+
+
 @api_router.get("/products/{product_id}", response_model=Product)
 async def get_product(product_id: str):
     product = await db.products.find_one({"id": product_id}, {"_id": 0})
