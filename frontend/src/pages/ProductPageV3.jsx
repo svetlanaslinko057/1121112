@@ -886,6 +886,14 @@ const ProductPageV3 = () => {
           product={product}
         />
       )}
+
+      {/* V2-23: Mobile Buy Bar */}
+      {product && product.stock_level > 0 && (
+        <MobileBuyBar 
+          product={product} 
+          onAdd={handleAddToCart}
+        />
+      )}
     </div>
   );
 };
