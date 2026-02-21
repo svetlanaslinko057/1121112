@@ -555,8 +555,46 @@ const ProductPageV3 = () => {
     ? Math.round(((product.compare_price - product.price) / product.compare_price) * 100)
     : 0;
 
+  // V2-24: SEO breadcrumbs data
+  const breadcrumbItems = [
+    { name: 'Головна', url: '/' },
+    { name: 'Каталог', url: '/catalog' },
+    ...(product.category_name ? [{ 
+      name: product.category_name, 
+      url: `/catalog?category=${product.category_id}` 
+    }] : []),
+    { name: product.title }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50" data-testid="product-page-v3">
+      {/* V2-24: SEO Meta and Schema */}
+      <SEOMeta 
+        title={product.title}
+        description={product.short_description || product.description?.substring(0, 160)}
+        image={images[0]}
+        url={`/product/${product.slug || product.id}`}
+        type="product"
+        product={{
+          price: product.price,
+          stock: product.stock_level,
+          brand: product.brand
+        }}
+      />
+      <ProductSchema product={{
+        name: product.title,
+        description: product.description,
+        images: images,
+        sku: product.sku || product.id,
+        brand: product.brand,
+        price: product.price,
+        stock: product.stock_level,
+        rating: product.rating,
+        reviews_count: product.reviews_count,
+        slug: product.slug || product.id
+      }} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+
       <div className="container-main px-4 py-6">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-gray-600 mb-6" data-testid="breadcrumbs">
