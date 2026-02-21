@@ -17,6 +17,8 @@ import AIRecommendations from '../components/AIRecommendations';
 import ProductCardCompact from '../components/ProductCardCompact';
 import ShareModal from '../components/ShareModal';
 import { trackProductView, trackAddToCart } from '../lib/track';
+import MobileBuyBar from '../components/product/MobileBuyBar';
+import { addToRecentlyViewed } from '../components/home/RecentlyViewed';
 
 // ============ GALLERY V3 ============
 const GalleryV3 = ({ images = [], videos = [], productTitle, discount }) => {
