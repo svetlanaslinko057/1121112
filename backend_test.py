@@ -393,13 +393,16 @@ class BackendAPITester:
         print(f"⏰ Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print("="*50)
         
-        # Run test suites
+        # Run test suites for V2-20+ features
         test_results = []
         
         test_results.append(self.test_health_check())
         test_results.append(self.test_products_seeding())  # Seed first to ensure data exists
         test_results.append(self.test_categories_tree_api())
         test_results.append(self.test_catalog_api())
+        test_results.append(self.test_v2_catalog_with_sort())  # V2-20: Catalog with sort
+        test_results.append(self.test_v2_products_by_ids())   # V2-20: Products by IDs
+        test_results.append(self.test_deal_of_day_endpoint()) # V2-20: Deal of Day
         test_results.append(self.test_search_api())
         test_results.append(self.test_wishlist_api())
         test_results.append(self.test_compare_api())
