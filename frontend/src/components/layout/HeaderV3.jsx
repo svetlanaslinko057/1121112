@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, Menu, Heart, GitCompare, User, Phone, X } from "lucide-react";
 import MegaMenu from "./MegaMenu";
+import MobileMenuDrawer from "./MobileMenuDrawer";
 import { MiniCart } from "../cart";
 import { useAuth } from "../../contexts/AuthContext";
 import { useLanguage } from "../../contexts/LanguageContext";
