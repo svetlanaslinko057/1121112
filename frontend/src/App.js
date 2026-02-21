@@ -62,6 +62,9 @@ import OrderDetailsV2 from './pages/OrderDetailsV2';
 import CompareBar from './components/compare/CompareBar';
 // V2-19: Search Results
 import SearchResults from './pages/SearchResults';
+// V2-19: Compare and Wishlist Pages
+import ComparePage from './pages/ComparePage';
+import WishlistPage from './pages/WishlistPage';
 import './App.css';
 
 // Analytics Wrapper Component
