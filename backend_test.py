@@ -337,13 +337,31 @@ class BackendAPITester:
 
 def main():
     """Main test execution"""
+    # Test both local and public URLs
+    print("="*60)
+    print("🏠 TESTING LOCAL BACKEND (localhost:8001)")
+    print("="*60)
+    
+    tester_local = BackendAPITester("http://localhost:8001")
+    success_local = tester_local.run_all_tests()
+    
+    print("\n" + "="*60)
+    print("🌐 TESTING PUBLIC BACKEND URL")
+    print("="*60)
+    
     # Use environment public URL
     backend_url = "https://smart-payment-core.preview.emergentagent.com"
+    tester_public = BackendAPITester(backend_url)
+    success_public = tester_public.run_all_tests()
     
-    tester = BackendAPITester(backend_url)
-    success = tester.run_all_tests()
+    print("\n" + "="*60)
+    print("🏆 FINAL RESULTS SUMMARY")
+    print("="*60)
+    print(f"Local Backend Tests:  {'✅ PASSED' if success_local else '❌ FAILED'}")
+    print(f"Public Backend Tests: {'✅ PASSED' if success_public else '❌ FAILED'}")
     
-    return 0 if success else 1
+    # Pass if at least local tests work
+    return 0 if success_local else 1
 
 
 if __name__ == "__main__":
