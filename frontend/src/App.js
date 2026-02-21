@@ -107,7 +107,10 @@ function App() {
                           <Route path="/product/:id" element={<ProductPageV3 />} />
                           <Route path="/offer/:offerId" element={<OfferDetail />} />
                           <Route path="/favorites" element={<Favorites />} />
+                          <Route path="/wishlist" element={<Favorites />} />
                           <Route path="/comparison" element={<Comparison />} />
+                          <Route path="/compare" element={<Comparison />} />
+                          <Route path="/search" element={<SearchResults />} />
                           <Route path="/cart" element={<Cart />} />
                           <Route path="/checkout" element={<CheckoutV3 />} />
                           <Route path="/checkout/v2" element={<CheckoutV2 />} />
