@@ -1,6 +1,10 @@
 """
 Backend API Testing Suite for Y-Store Electronics E-commerce
-Testing V2-19 Wishlist, Compare, Catalog, Search, and Health APIs
+Testing V2-20 through V2-23 Retail Homepage Features:
+- V2-20: HeroCarousel, ProductSection, DealOfDay, CategoriesGrid, BrandsStrip, RecentlyViewed, NewsletterBlock
+- V2-21: QuickViewModal
+- V2-22: UI Polish 3.0 (shadows, animations, btn-primary)
+- V2-23: Mobile Retail (MobileMenuDrawer, MobileBuyBar)
 """
 import requests
 import json
