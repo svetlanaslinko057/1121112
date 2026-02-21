@@ -1,0 +1,159 @@
+{
+  "summary": "Completed testing V2-20 through V2-23 retail homepage features. Backend APIs working perfectly locally (100% success rate) including new endpoints for products/by-ids and catalog sort. However, major frontend integration issues found - most V2-20+ components not rendering despite implementation existing in codebase. Public URL completely broken (serving wrong app).",
+
+  "backend_issues": {
+    "critical_bugs": [
+      {
+        "endpoint": "All /api/v2/* endpoints on public URL",
+        "issue": "Public URL https://smart-payment-core.preview.emergentagent.com returns 404 for all API endpoints and serves wrong application (Emergent platform preview instead of Y-Store)",
+        "impact": "Complete frontend-backend integration failure on production URL",
+        "fix_priority": "CRITICAL"
+      }
+    ],
+    "working_endpoints": [
+      {
+        "endpoint": "POST /api/v2/products/by-ids",
+        "status": "✅ Working on localhost:8001",
+        "notes": "V2-20: Returns 3/3 products correctly for Recently Viewed component"
+      },
+      {
+        "endpoint": "GET /api/v2/catalog with sort parameter",
+        "status": "✅ Working on localhost:8001", 
+        "notes": "V2-20: All sort options working (popular, price_asc, price_desc, new, discount)"
+      },
+      {
+        "endpoint": "GET /api/v2/catalog for Deal of Day",
+        "status": "✅ Working on localhost:8001",
+        "notes": "V2-20: Returns deal product with discount data (Apple Watch 18999 vs 21999)"
+      },
+      {
+        "endpoint": "GET /api/v2/categories/tree", 
+        "status": "✅ Working on localhost:8001",
+        "notes": "Returns 58 categories across 10 root categories for CategoriesGrid"
+      }
+    ]
+  },
+
+  "frontend_issues": {
+    "critical_bugs": [
+      {
+        "component": "Public URL Application",
+        "issue": "Wrong application served at public URL - shows Emergent preview platform instead of Y-Store retail homepage",
+        "affected_selectors": ["Entire application"],
+        "fix_priority": "CRITICAL"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "All API integrations",
+        "issue": "Frontend configured to use public URL that returns 404 for all endpoints, causing complete data loading failure",
+        "affected_selectors": ["All components requiring API data"],
+        "fix_priority": "CRITICAL"
+      },
+      {
+        "flow": "CORS Authentication",
+        "issue": "CORS policy blocks auth requests with credentials and wildcard origin",
+        "affected_selectors": ["Authentication system"],  
+        "fix_priority": "HIGH"
+      }
+    ],
+    "missing_components": [
+      {
+        "component": "HeroCarousel (V2-20)",
+        "issue": "Component not found on homepage despite implementation existing in /app/frontend/src/components/home/HeroCarousel.jsx",
+        "affected_selectors": ["[data-testid='hero-carousel'], .hero-carousel, .carousel"],
+        "fix_priority": "HIGH"
+      },
+      {
+        "component": "ProductSection (V2-20)", 
+        "issue": "Component not rendering on homepage despite implementation existing",
+        "affected_selectors": ["[data-testid='product-section'], .product-section"],
+        "fix_priority": "HIGH"
+      },
+      {
+        "component": "CategoriesGrid (V2-20)",
+        "issue": "Component not found on homepage",
+        "affected_selectors": ["[data-testid='categories-grid'], .categories-grid"],
+        "fix_priority": "HIGH"
+      },
+      {
+        "component": "RecentlyViewed (V2-20)",
+        "issue": "Component not found despite /api/v2/products/by-ids endpoint working",
+        "affected_selectors": ["[data-testid='recently-viewed'], .recently-viewed"],
+        "fix_priority": "MEDIUM"
+      },
+      {
+        "component": "NewsletterBlock (V2-20)",
+        "issue": "Component not found on homepage",
+        "affected_selectors": ["[data-testid='newsletter-block'], .newsletter"],
+        "fix_priority": "MEDIUM"
+      },
+      {
+        "component": "QuickViewModal (V2-21)",
+        "issue": "No quick view triggers found on product cards",
+        "affected_selectors": ["[data-testid*='quick-view'], .quick-view"],
+        "fix_priority": "MEDIUM"
+      },
+      {
+        "component": "MobileMenuDrawer (V2-23)",
+        "issue": "Mobile menu trigger not found",
+        "affected_selectors": ["[data-testid='mobile-menu-drawer'], .mobile-menu-drawer"],
+        "fix_priority": "MEDIUM"
+      },
+      {
+        "component": "MobileBuyBar (V2-23)",
+        "issue": "Mobile buy bar component not found", 
+        "affected_selectors": ["[data-testid='mobile-buy-bar'], .mobile-buy-bar"],
+        "fix_priority": "MEDIUM"
+      }
+    ],
+    "partial_components": [
+      {
+        "component": "DealOfDay (V2-20)",
+        "status": "✅ Component found but empty",
+        "notes": "Component renders but no timer or deal data due to API failures"
+      },
+      {
+        "component": "BrandsStrip (V2-20)",
+        "status": "✅ Component found but empty", 
+        "notes": "Component structure exists but no brand items due to API data issues"
+      }
+    ],
+    "working_components": [
+      {
+        "component": "Y-Store Homepage",
+        "status": "✅ Loads correctly on localhost",
+        "notes": "Proper title, header, navigation structure present"
+      },
+      {
+        "component": "CSS Animations (V2-22)",
+        "status": "✅ Implemented correctly",
+        "notes": "Found .animate-fadeIn, .animate-scaleIn, .btn-primary classes"
+      }
+    ]
+  },
+
+  "passed_tests": [
+    "Local Backend Health Check (100% success)",
+    "V2-20: Products by IDs API endpoint",
+    "V2-20: Catalog API with all sort parameters",
+    "V2-20: Deal of Day data endpoint", 
+    "Categories Tree API (58 categories)",
+    "Search, Wishlist, Compare APIs",
+    "Frontend Homepage Loading (localhost)",
+    "CSS Animation Classes Implementation (V2-22)",
+    "Page Title and Navigation Structure"
+  ],
+
+  "test_report_links": ["/app/backend_test.py"],
+
+  "success_percentage": "Backend: 100% (localhost), 0% (public URL). Frontend: 30% (basic structure + CSS animations working, most V2-20+ components missing)",
+
+  "updated_files": ["/app/backend_test.py"],
+
+  "action_item_for_main_agent": "CRITICAL: 1) Fix public URL routing - currently serves Emergent preview platform instead of Y-Store retail app. 2) Investigate why V2-20+ components (HeroCarousel, ProductSection, CategoriesGrid, etc.) are not rendering on homepage despite implementation files existing. 3) Fix CORS configuration for authentication endpoints. Backend APIs for V2-20+ features work perfectly locally.",
+
+  "should_call_test_agent_after_fix": "true",
+  
+  "should_main_agent_test_itself": "false"
+}
