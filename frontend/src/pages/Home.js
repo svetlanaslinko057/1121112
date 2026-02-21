@@ -180,15 +180,24 @@ const Home = () => {
               <BrandsStrip />
             </div>
 
+            {/* V2-20: New Arrivals Section */}
+            <ProductSection title="Новинки" sort="new" link="/catalog?sort=new" />
+
             <div className="mt-8">
               <AdvantagesStrip />
             </div>
+
+            {/* V2-20: Recently Viewed */}
+            <RecentlyViewed />
 
             <div className="mt-8">
               <Testimonials />
             </div>
 
-            <div className="mt-8">
+            {/* V2-20: Newsletter Block */}
+            <NewsletterBlock />
+
+            <div className="mt-8 hidden">
               <BlogTeasers />
             </div>
 
