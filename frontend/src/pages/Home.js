@@ -83,6 +83,11 @@ const Home = () => {
         keywords="інтернет магазин електроніки, купити смартфон україна, ноутбуки київ, побутова техніка онлайн, телевізори купити, техніка для дому, y-store"
         type="website"
       />
+      {/* V2-24: Schema.org structured data */}
+      <OrganizationSchema />
+      <WebSiteSchema />
+      <LocalBusinessSchema />
+      
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
         <div className="container-main py-8">
           <div className="flex gap-8">
