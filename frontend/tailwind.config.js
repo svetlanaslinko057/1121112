@@ -76,9 +76,17 @@ module.exports = {
         '2xl': "20px",
       },
       boxShadow: {
-        soft: "0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02)",
-        medium: "0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03)",
+        soft: "0 8px 30px rgba(0, 0, 0, 0.06)",
+        medium: "0 12px 40px rgba(0, 0, 0, 0.12)",
         strong: "0 8px 24px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04)",
+      },
+      borderRadius: {
+        lg: "12px",
+        md: "10px",
+        sm: "8px",
+        xl: "16px",
+        '2xl': "20px",
+        'xl2': "1.25rem",
       },
       keyframes: {
         "accordion-down": {
