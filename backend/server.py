@@ -3774,6 +3774,13 @@ app.include_router(refunds_router, prefix="/api/v2", tags=["Refunds V2"])
 from modules.refunds.refunds_admin_routes import router as refunds_admin_router
 app.include_router(refunds_admin_router, prefix="/api/v2", tags=["Refunds Admin V2"])
 
+# V2-19: Wishlist + Compare
+from modules.wishlist.wishlist_routes import router as wishlist_router
+app.include_router(wishlist_router, tags=["Wishlist V2"])
+
+from modules.compare.compare_routes import router as compare_router
+app.include_router(compare_router, tags=["Compare V2"])
+
 # Security Middleware (Rate Limiting, Anti-abuse)
 from modules.security.middleware import SecurityMiddleware
 app.add_middleware(SecurityMiddleware)
