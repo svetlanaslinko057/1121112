@@ -58,6 +58,8 @@ import CatalogV2 from './pages/CatalogV2';
 import CabinetLogin from './pages/CabinetLogin';
 import CabinetV2 from './pages/CabinetV2';
 import OrderDetailsV2 from './pages/OrderDetailsV2';
+// V2-19: Compare Bar
+import CompareBar from './components/compare/CompareBar';
 import './App.css';
 
 // Analytics Wrapper Component
